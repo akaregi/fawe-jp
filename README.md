@@ -4,7 +4,7 @@ Japanese translation of FastAsyncWorldEdit.
 
 ## Original
 
-https://github.com/boy0001/FastAsyncWorldedit
+[boy0001's FastAsyncWorldEdit repository](https://github.com/boy0001/FastAsyncWorldedit)
 
 ## If there's problem
 
