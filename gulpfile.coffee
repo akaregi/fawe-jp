@@ -7,11 +7,11 @@ packageImporter = require 'node-sass-package-importer'
 gulp.task 'jade', ->
     gulp.src(['src/html/**.jade', '!src/html/_**.jade'])
     .pipe jade()
-    .pipe gulp.dest 'dist/'
+    .pipe gulp.dest 'docs/'
 
 gulp.task 'sass', ->
     gulp.src 'src/css/*.sass'
         .pipe sass({
             importer: packageImporter()
         })
-        .pipe gulp.dest 'dist/css'
+        .pipe gulp.dest 'docs/css'
