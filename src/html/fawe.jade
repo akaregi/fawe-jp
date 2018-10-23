@@ -1,0 +1,63 @@
+-   var title           = 'FastAsyncWorldEdit コマンド・ブラシ 説明書'
+-   var author          = 'AKAREGI (AkagiCrafter)'
+-   var description     = 'Bukkit/Spigot のプラグイン FastAsyncWorldEdit(FAWE) の説明書です。コマンドの使い方を中心に、ブラシやパターンについても載せています。'
+-   var ogp_url         = 'https://akagicrafter.github.io/fawe.html'
+-   var ogp_image       = 'https://i.imgur.com/u2n6t2h.png'
+-   var ogp_twitter     = '@akgmoegi'
+-   var last            = '2018/10/01'
+
+<!DOCTYPE html>
+html(lang="ja")
+    head
+        include _meta.jade
+
+    body
+        .container.grid-md
+            h1 #{title}
+            include:marked ../markdown/01_Introduction.md
+
+            div.divider
+
+            include:marked ../markdown/02_Uncategorized.md
+            include:marked ../markdown/03_WorldEdit.md
+            include:marked ../markdown/04_Utility.md
+            include:marked ../markdown/05_Regions.md
+            include:marked ../markdown/06_Selection.md
+            include:marked ../markdown/07_History.md
+            include:marked ../markdown/08_Schematic.md
+            include:marked ../markdown/09_Clipboard.md
+            include:marked ../markdown/10_Generation.md
+            include:marked ../markdown/11_Biome.md
+            include:marked ../markdown/12_Anvil.md
+            include:marked ../markdown/13_Superpickaxe.md
+            include:marked ../markdown/14_Navigation.md
+            include:marked ../markdown/15_Snapshot.md
+            include:marked ../markdown/16_SnapshotUtil.md
+            include:marked ../markdown/17_Scripting.md
+            include:marked ../markdown/18_Chunk.md
+            include:marked ../markdown/19_Options.md
+            include:marked ../markdown/20_BrushOptions.md
+            include:marked ../markdown/21_Tool.md
+            include:marked ../markdown/22_Brush.md
+            include:marked ../markdown/23_Masks.md
+            include:marked ../markdown/24_Patterns.md
+            include:marked ../markdown/25_Transforms.md
+            include:marked ../markdown/26_CFI.md
+
+            footer.container.grid-md.docs-footer
+
+                p
+                    a(href="https://twitter.com/akgmoegi") Twitter
+                    span.divide-dot ・
+                    a(href="https://mstdn.jp/@SUBLIMATION") Mastodon
+                    span.divide-dot ・
+                    a(href="https://github.com/AkagiCrafter/FastAsyncWorldEdit-JP") Repository
+                    span.divide-dot ・
+                    | Last Update #{last}
+
+                p
+                    | Translated and wrote at 🏠 by&nbsp;
+                    a(href="#") AKAREGI
+                    | .
+                    | Original is&nbsp;
+                    a(href="https://github.com/boy0001/FastAsyncWorldedit/wiki/Commands") boy0001's Wiki.
