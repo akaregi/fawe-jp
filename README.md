@@ -12,4 +12,4 @@ Please create issue or pull request.
 
 ## Copyrights
 
-Rights of all contents belongs to boy0001.
+Rights of all contents belong to boy0001.
