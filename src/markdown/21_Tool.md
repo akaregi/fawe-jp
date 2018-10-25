@@ -30,7 +30,7 @@
 /br cycler
 ```
 
-ブロックのメタ値を変える(例: 1 → 15)。
+ブロックのメタ値を変える(例： 1 → 15)。
 左クリックで順送り。右クリックで逆送り。
 
 #### 向きが変わるもの
@@ -55,8 +55,8 @@
 
 大釜(水が貯まる)、雪(高さが変わる)、ケーキ(食べかけ度が変わる)
 
-参考画像: 対応ブロック
-バージョン更新で対応ブロックが増える可能性がある。![cycler supporting blocks](https://i.imgur.com/gMW5OJX.png)
+参考画像： 対応ブロック（FAWE のバージョン更新によって対応するブロックが増えるかもしれない）
+![Supporting blocks for /br cycler](https://i.imgur.com/gMW5OJX.png)
 
 ### /br deltree
 

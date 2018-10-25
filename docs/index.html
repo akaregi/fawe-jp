@@ -173,7 +173,7 @@
 //rep と略せる。
 </code></pre>
 <p>領域内のブロックを別のブロックに置き換える。
-置換元ブロックを略した場合は空気以外のブロック全てが置換先ブロックになる。</p>
+置換元ブロックを略した場合は空気以外のブロックすべてが置換先ブロックになる。</p>
 <h3 id="-walls">//walls</h3>
 <pre><code class="lang-command">//walls &lt;pattern&gt;
 </code></pre>
@@ -297,14 +297,14 @@ FAWE 18.5.11-fe17434-1112 では厚さに 4 以上を指定すると例外(java.
 -h : 水平方向のみ
 -v : 垂直方向のみ
 </code></pre>
-<p>領域を一回り大きくする。</p>
+<p>領域をひと回り大きくする。</p>
 <h3 id="-inset">//inset</h3>
 <pre><code class="lang-command">//inset &lt;量&gt;
 
 -h : 水平方向のみ
 -v : 垂直方向のみ
 </code></pre>
-<p>領域を一回り小さくする。</p>
+<p>領域をひと回り小さくする。</p>
 <h3 id="-pos1">//pos1</h3>
 <pre><code class="lang-command">//pos1 [座標]
 </code></pre>
@@ -348,7 +348,7 @@ FAWE 18.5.11-fe17434-1112 では厚さに 4 以上を指定すると例外(java.
 -s : 選択した領域を元にチャンクを選択する
 -c : チャンクの座標を特定する
 </code></pre>
-<p>現在立っているチャンクを選択する。-s フラグを指定すると、選択した領域が含むチャンク全てを選択する。</p>
+<p>現在立っているチャンクを選択する。-s フラグを指定すると、選択した領域が含むチャンクすべてを選択する。</p>
 <p>座標の直接指定を行うと、現在立っている座標ではなくその座標のチャンクが選択される。チャンク座標を指定するには -c フラグを指定する。そうでなければ完全な座標が暗黙的に指定される。</p>
 <h3 id="-toggleeditwand">/toggleeditwand</h3>
 <pre><code class="lang-command">/toggleditwand
@@ -469,7 +469,7 @@ FAWE 18.5.11-fe17434-1112 では厚さに 4 以上を指定すると例外(java.
 -m : ソースマスクを設定する(そのため空気ブロックは無視される)
 -b : バイオームもコピーする
 </code></pre>
-<p>領域をコピーしクリップボードに保存する。<strong>//paste 実行後に初めて領域が切り取られる</strong>。
+<p>領域をコピーしクリップボードに保存する。<strong>//paste 実行後にはじめて領域が切り取られる</strong>。
 エンティティを貼り付けたとしても、それを //undo することはできない。</p>
 <h3 id="-flip">//flip</h3>
 <pre><code class="lang-command">//flip [方角]
@@ -493,11 +493,11 @@ Z軸を指定すると横方向に回転する。</p>
 <h3 id="-sphere">//sphere</h3>
 <pre><code class="lang-command">//sphere &lt;pattern&gt; &lt;半径:X&gt;[,&lt;半径:Y&gt;,&lt;半径:Z&gt;] [頭上生成?]
 </code></pre>
-<p>球体を生成する。楕円球を作ることも出来る。</p>
+<p>球体を生成する。楕円球を作ることもできる。</p>
 <h3 id="-hsphere">//hsphere</h3>
 <pre><code class="lang-command">//hsphere &lt;pattern&gt; &lt;半径:X&gt;[,&lt;半径:Y&gt;,&lt;半径:Z&gt;] [頭上生成?]
 </code></pre>
-<p>中が空洞の球体を生成する。楕円球を作ることも出来る。</p>
+<p>中が空洞の球体を生成する。楕円球を作ることもできる。</p>
 <h3 id="-cyl">//cyl</h3>
 <pre><code class="lang-command">//cyl &lt;半径:X&gt;[,&lt;半径:Z&gt;] [高さ]
 </code></pre>
@@ -505,7 +505,7 @@ Z軸を指定すると横方向に回転する。</p>
 <h3 id="-hcyl">//hcyl</h3>
 <pre><code class="lang-command">//hcyl &lt;半径:X&gt;[,&lt;半径:Z&gt;] [高さ]
 </code></pre>
-<p>中が空洞の円柱を生成する。楕円にすることも出来る。</p>
+<p>中が空洞の円柱を生成する。楕円にすることもできる。</p>
 <h3 id="-pyramid">//pyramid</h3>
 <pre><code class="lang-command">//pyramid &lt;pattern&gt; &lt;大きさ&gt;
 </code></pre>
@@ -566,7 +566,7 @@ Z軸を指定すると横方向に回転する。</p>
 <h3 id="-sp-single">/sp single</h3>
 <pre><code class="lang-command">/sp single
 </code></pre>
-<p>単ブロックのみ適用されるスーパーピッケルを有効にする(=通常動作に戻す)。</p>
+<p>単独のブロックのみ適用されるスーパーピッケルを有効にする（＝1つずつ壊す）。</p>
 <h2 id="-">移動</h2>
 <h3 id="-unstuck">/unstuck</h3>
 <p>/unstuck</p>
@@ -607,7 +607,7 @@ Z軸を指定すると横方向に回転する。</p>
 <h3 id="-br-cycler">/br cycler</h3>
 <pre><code class="lang-command">/br cycler
 </code></pre>
-<p>ブロックのメタ値を変える(例: 1 → 15)。
+<p>ブロックのメタ値を変える(例： 1 → 15)。
 左クリックで順送り。右クリックで逆送り。</p>
 <h4 id="-">向きが変わるもの</h4>
 <p>ピストン、かまど、ディスペンサー、ドロッパー
@@ -621,8 +621,8 @@ Z軸を指定すると横方向に回転する。</p>
 <p>砂岩、石レンガ、クォーツブロック</p>
 <h5 id="-">その他</h5>
 <p>大釜(水が貯まる)、雪(高さが変わる)、ケーキ(食べかけ度が変わる)</p>
-<p>参考画像: 対応ブロック
-バージョン更新で対応ブロックが増える可能性がある。<img src="https://i.imgur.com/gMW5OJX.png" alt="cycler supporting blocks"></p>
+<p>参考画像： 対応ブロック（FAWE のバージョン更新によって対応するブロックが増えるかもしれない）
+<img src="https://i.imgur.com/gMW5OJX.png" alt="Supporting blocks for /br cycler"></p>
 <h3 id="-br-deltree">/br deltree</h3>
 <pre><code class="lang-command">/br deltree
 </code></pre>
@@ -630,7 +630,7 @@ Z軸を指定すると横方向に回転する。</p>
 <h2 id="-">ブラシ</h2>
 <p><code>//brush</code> , <code>/brush</code> , <code>//br</code> , <code>/br</code> で実行できる。下記では <code>/br</code> と略する。</p>
 <p>基本的に設置ができないアイテム(=ブロック以外)を手に持った状態で、コマンドを実行する。
-同じアイテムに対して結び付けられるブラシは1種類のみである。</p>
+同じアイテムに対して結び付けられるブラシは一種類のみである。</p>
 <h3 id="-none">/none</h3>
 <pre><code class="lang-command">/br none
 他: /none
@@ -670,7 +670,7 @@ Z軸を指定すると横方向に回転する。</p>
 または、クリップボードにコピー(<code>//copy</code>)したブロックを貼り付ける。</p>
 <h4 id="-">例</h4>
 <p>/br cp -a
-自分の向きに合わせてブロックが貼り付けられている。<img src="https://i.imgur.com/VgMiMmG.png" alt="br cp -a"></p>
+自分の向きに合わせてブロックが貼り付けられている。<img src="https://i.imgur.com/rikH7Mt.png" alt="br cp -a"></p>
 <h3 id="-br-extinguish">/br extinguish</h3>
 <pre><code class="lang-command">/br extinguish [半径=5]
 他: /br ex
@@ -717,8 +717,8 @@ Z軸を指定すると横方向に回転する。</p>
 <pre><code class="lang-command">/br splatter &lt;pattern&gt; [半径=5] [生成数=1] [大きさ=5] [同材質=true]
 他: /br splat
 </code></pre>
-<p>同材質がTRUEの場合は一つの塊は同じブロックになる。
-FALSEの場合は一つの塊でも複数ブロックが混ざるようになる。</p>
+<p>同材質が True の場合は1つの塊は同じブロックになる。
+False の場合は1つの塊でも複数ブロックが混ざるようになる。</p>
 <p>筆で水を跳ね飛ばすようにブロックを生成する。</p>
 <h4 id="-">例</h4>
 <p>/br splatter 251:7,251:8,251:11 30 30
@@ -732,7 +732,7 @@ FALSEの場合は一つの塊でも複数ブロックが混ざるようになる
 <p>/br surface 251,251:7,251:8,251:11 30 30
 <img src="https://i.imgur.com/j9UP3gm.png" alt="br surface"></p>
 <h2 id="-">マスク</h2>
-<p><strong>マスク</strong>はブロックを配置することが出来るか判断する。
+<p><strong>マスク</strong>はブロックを配置することができるか判断する。
 これにより、ブロックの編集範囲を限定することができる。</p>
 <p>平たく言うと、「<strong>//set で敷き詰めるブロックや、 /br sphere で生成するブロックの置く場所を制限する</strong>」。</p>
 <p>, か &amp; でマスクを複数指定できる(即ち /mask 2,3 など)。
@@ -741,7 +741,7 @@ FALSEの場合は一つの塊でも複数ブロックが混ざるようになる
 : 編集範囲を草ブロックか丸石のみに限定する。</p>
 <p>/mask ![stone]&amp;![$river]
 : 編集範囲を「石かつバイオームが川」<strong>ではない</strong>部分のみに限定する。</p>
-<p>場合によっては、マスクを適量 [] で囲う必要がある。</p>
+<p>場合によっては、マスクを適量 <code>[]</code> で囲う必要がある。</p>
 <h3 id="-">コマンド</h3>
 <pre><code class="lang-command">/mask &lt;mask&gt; /gmask &lt;mask&gt;
 </code></pre>
@@ -787,7 +787,7 @@ FALSEの場合は一つの塊でも複数ブロックが混ざるようになる
 <p><strong>water</strong> (水ブロック)の下だけを書き換えるようになる。</p>
 <h3 id="-biome">$biome</h3>
 <p>編集範囲を特定のバイオームに限定する。biome のリストは //biomelist で見られる。
-また、バイオームを書き換える際に用いることも出来る。</p>
+また、バイオームを書き換える際に用いることもできる。</p>
 <p>/br s $roofed_forest [半径]
 「覆われた森」バイオームを「描く」要領で設定できる。</p>
 <h3 id="-mask">!mask</h3>
