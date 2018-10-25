@@ -21,3 +21,5 @@ gulp.task 'md', ->
     gulp.src 'src/markdown/*.md'
         .pipe concat('markdown.md')
         .pipe gulp.dest 'docs/'
+
+gulp.task 'docs', ['jade', 'md']
