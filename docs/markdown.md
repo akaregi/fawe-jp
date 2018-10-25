@@ -116,7 +116,9 @@ hastebin.com にデバッグ情報を書き出してアップロードする。
 ```command
 /remove <種類> <半径>
 
-<種類> : projectiles(矢など), items(アイテム), paintings(絵画), boats(ボート), minecarts(トロッコ), tnt(TNT), xp(経験値)
+<種類>:
+projectiles(矢など) items(アイテム) paintings(絵画)
+boats(ボート) minecarts(トロッコ) tnt(TNT) xp(経験値)
 ```
 
 半径内の指定した種類のエンティティをすべて削除する。
@@ -299,6 +301,7 @@ GUIを表示する。FAWE 18.5.11-fe17434-1112 では実装されていない。
 ```
 
 処理の実行を承認する。範囲が広い処理の続行などに使われる。
+
 ## 領域操作
 
 ### //set

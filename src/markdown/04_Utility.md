@@ -5,7 +5,9 @@
 ```command
 /remove <種類> <半径>
 
-<種類> : projectiles(矢など), items(アイテム), paintings(絵画), boats(ボート), minecarts(トロッコ), tnt(TNT), xp(経験値)
+<種類>:
+projectiles(矢など) items(アイテム) paintings(絵画)
+boats(ボート) minecarts(トロッコ) tnt(TNT) xp(経験値)
 ```
 
 半径内の指定した種類のエンティティをすべて削除する。
