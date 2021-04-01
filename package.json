@@ -10,7 +10,7 @@
     "gulp-jade": "^1.1.0",
     "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.0.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jstransformer-marked": "^1.0.3",
     "marked": "^0.6.1",
     "node-sass-package-importer": "^5.2.0",
