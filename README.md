@@ -1,3 +1,9 @@
+# !!! WARNING !!!
+
+This document is no longer supported. この文書はもうサポートされません。
+
+----
+
 # fawe-jp
 
 Japanese translation of FastAsyncWorldEdit.
