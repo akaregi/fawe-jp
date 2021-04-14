@@ -1,0 +1,75 @@
+body {
+    color: #50596c;
+
+    font-size: 18px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic Pro", "Yu Gothic", YuGothic, Meiryo, "Helvetica Neue", sans-serif;
+    text-rendering: optimizeLegibility;
+
+    line-height: 1.47;
+}
+
+pre {
+    padding: 1rem;
+    background: #f8f9fa;
+
+    border-radius: 10px;
+
+    overflow-x: scroll;
+}
+
+img {
+    max-width: 100%;
+}
+
+hr {
+    margin: 2rem 0;
+    border: 1px solid #dddddd;
+}
+
+a {
+    color: #5755d9;
+    text-decoration: none;
+    outline: none;
+}
+
+.container {
+    max-width: 768px;
+
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.footer {
+    margin: 3rem 0;
+
+    color: #acb3c2;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer ul {
+    display: flex;
+    
+    margin: 0;
+    padding: 0;
+}
+
+.footer ul li {
+    list-style-type: none;
+
+    margin-right: .5rem;
+}
+
+.footer a {
+    color: #667189;
+}
+
+.footer li::after {
+    content: " ・";
+}
+
+.footer li:last-child::after {
+    content: none;
+}

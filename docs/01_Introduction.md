@@ -1,6 +1,16 @@
+----
+
+## 警告
+
+**このドキュメントは最終更新から3年以上経過しており内容が旧式化している**。よってこのドキュメントを引き続き参照することは推奨されない。しかし有志によるドキュメントの更新は [GitHub](https://github.com/akaregi/fawe-jp) 上で受け付けている。
+
+[FAWE First Guide](https://book.azure.icu/fastasyncworldedit/fawe-first-guide) は筆者の新しく書いた簡便な後継ドキュメントである。すべてを網羅はしていないもののこちらのほうが見やすく参照しやすいと思われる。
+
+----
+
 ## はじめに
 
-これは **boy0001** 氏による **[FastAsyncWorldEdit](https://github.com/boy0001/FastAsyncWorldedit)** の説明書である。
+これは **IntellectualSites** による **[FastAsyncWorldEdit](https://github.com/IntellectualSites/FastAsyncWorldEdit)** の説明書である。
 
 内容の正しさについては一切保証しない。翻訳者はこの説明書の間違い・翻訳ミスによる事故の責任を負わない。
 
@@ -8,10 +18,9 @@
 
 ### 翻訳者
 
-* HN: あかれぎ
+* 名前：あかれぎ
 * Minecraft ID: AkagiCrafter
-* Twitter: [@akgmoegi](https://twitter.com/akgmoegi)
-* Mastodon: [@akaregi](https://mstdn.jp/@akaregi)
+* Fediverse: [@red_resolution@social.azure.icu](https://social.azure.icu/red_resolution)
 
 ### 謝辞
 

@@ -1,6 +1,16 @@
+----
+
+## 警告
+
+**このドキュメントは最終更新から3年以上経過しており内容が旧式化している**。よってこのドキュメントを引き続き参照することは推奨されない。しかし有志によるドキュメントの更新は [GitHub](https://github.com/akaregi/fawe-jp) 上で受け付けている。
+
+[FAWE First Guide](https://book.azure.icu/fastasyncworldedit/fawe-first-guide) は筆者の新しく書いた簡便な後継ドキュメントである。すべてを網羅はしていないもののこちらのほうが見やすく参照しやすいと思われる。
+
+----
+
 ## はじめに
 
-これは **boy0001** 氏による **[FastAsyncWorldEdit](https://github.com/boy0001/FastAsyncWorldedit)** の説明書である。
+これは **IntellectualSites** による **[FastAsyncWorldEdit](https://github.com/IntellectualSites/FastAsyncWorldEdit)** の説明書である。
 
 内容の正しさについては一切保証しない。翻訳者はこの説明書の間違い・翻訳ミスによる事故の責任を負わない。
 
@@ -8,10 +18,9 @@
 
 ### 翻訳者
 
-* HN: あかれぎ
+* 名前：あかれぎ
 * Minecraft ID: AkagiCrafter
-* Twitter: [@akgmoegi](https://twitter.com/akgmoegi)
-* Mastodon: [@akaregi](https://mstdn.jp/@akaregi)
+* Fediverse: [@red_resolution@social.azure.icu](https://social.azure.icu/red_resolution)
 
 ### 謝辞
 
@@ -995,7 +1004,7 @@ Webインタフェースを通じてクリップボードから Schematic ファ
 
 選択された領域のバイオームを表示する。
 何も指定しなければ、選択されたブロックすべての情報が表示される。
-
+## Anvil
 ## スーパーピッケル
 
 `//` で無効にできる。
@@ -1086,12 +1095,12 @@ Webインタフェースを通じてクリップボードから Schematic ファ
 
 頭上の天井の真下に移動する。
 
-
-
-
-
-
-
+## Snapshot
+## Snapshot utilities
+## Scripting
+## Chunk
+## Options
+## Brush Options
 ## ツール
 
 ### /br info
@@ -1337,16 +1346,15 @@ False の場合は1つの塊でも複数ブロックが混ざるようになる�
 **マスク**はブロックを配置することができるか判断する。
 これにより、ブロックの編集範囲を限定することができる。
 
-平たく言うと、「**//set で敷き詰めるブロックや、 /br sphere で生成するブロックの置く場所を制限する**」。
+平たく言うと **//set で敷き詰めるブロックや、 /br sphere で生成するブロックの置く場所を制限する**。
 
 , か & でマスクを複数指定できる(即ち /mask 2,3 など)。
 , はいずれかのマスクが該当すればブロックが編集されるが、&はすべてのマスクが該当されなければ編集されない。
 
-/mask grass,cobblestone
-: 編集範囲を草ブロックか丸石のみに限定する。
-
-/mask ![stone]&![$river]
-: 編集範囲を「石かつバイオームが川」**ではない**部分のみに限定する。
+* `/mask grass,cobblestone` 
+  編集範囲を草ブロックか丸石のみに限定する。
+* `/mask ![stone]&![$river]`
+  編集範囲を「石かつバイオームが川」**ではない**部分のみに限定する。
 
 場合によっては、マスクを適量 `[]` で囲う必要がある。
 
@@ -1403,7 +1411,7 @@ IDのみに限定する。
 
 ### #nolight
 
-(#haslight の逆)
+(`#haslight` の逆)
 発光しているブロックか光があたっていないブロック**以外**に限定する。
 
 ### #dregion
@@ -1439,7 +1447,12 @@ IDのみに限定する。
 編集範囲を特定のバイオームに限定する。biome のリストは //biomelist で見られる。
 また、バイオームを書き換える際に用いることもできる。
 
+#### 例
+
+```command
 /br s $roofed_forest [半径]
+```
+
 「覆われた森」バイオームを「描く」要領で設定できる。
 
 ### !mask
@@ -1507,4 +1520,5 @@ IDのみに限定する。
 #### 例
 
 (階段ブロックを範囲指定し) //rep #id[67] と実行すると、階段の向きはそのままで丸石の階段に置換えられる。
-
+## Transforms
+## CFI
