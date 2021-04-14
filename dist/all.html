@@ -1,0 +1,813 @@
+<hr>
+<h2 id="警告">警告</h2>
+<p><strong>このドキュメントは最終更新から3年以上経過しており内容が旧式化している</strong>。よってこのドキュメントを引き続き参照することは推奨されない。しかし有志によるドキュメントの更新は <a href="https://github.com/akaregi/fawe-jp">GitHub</a> 上で受け付けている。</p>
+<p><a href="https://book.azure.icu/fastasyncworldedit/fawe-first-guide">FAWE First Guide</a> は筆者の新しく書いた簡便な後継ドキュメントである。すべてを網羅はしていないもののこちらのほうが見やすく参照しやすいと思われる。</p>
+<hr>
+<h2 id="はじめに">はじめに</h2>
+<p>これは <strong>IntellectualSites</strong> による <strong><a href="https://github.com/IntellectualSites/FastAsyncWorldEdit">FastAsyncWorldEdit</a></strong> の説明書である。</p>
+<p>内容の正しさについては一切保証しない。翻訳者はこの説明書の間違い・翻訳ミスによる事故の責任を負わない。</p>
+<p>誤記の訂正や改善点の意見を歓迎する。<a href="https://github.com/akaregi/fawe-jp">GitHub</a> の Issue / Pull request で受け付ける。</p>
+<h3 id="翻訳者">翻訳者</h3>
+<ul>
+<li>名前：あかれぎ</li>
+<li>Minecraft ID: AkagiCrafter</li>
+<li>Fediverse: <a href="https://social.azure.icu/red_resolution">@red_resolution@social.azure.icu</a></li>
+</ul>
+<h3 id="謝辞">謝辞</h3>
+<p>この説明書は<a href="https://github.com/boy0001/FastAsyncWorldedit/wiki/Commands">公式の Wiki のコマンドページ</a>を参考にしている。FAWE の開発を行っているすべての人に感謝申し上げる。</p>
+<p>スクリーンショットの一部に <strong>Mizuno</strong> 氏による <a href="http://forum.minecraftuser.jp/viewtopic.php?t=30945"><strong>Mizuno’s 16 Craft</strong></a> を利用している。Mizuno 氏に素晴らしいテクスチャ制作への敬意を表する。</p>
+<h3 id="注意">注意</h3>
+<p>対応バージョン： <strong>18.5.11-fe17434-1112</strong> (2018年5月11日)</p>
+<ul>
+<li><code>&lt;引数&gt;</code> は必ず指定しなければならない。</li>
+<li><code>[引数=3]</code> は指定しなくても良い。<code>=3</code> などとついている場合、引数を指定しなければその値になる。</li>
+<li>時折出てくる <code>pattern</code> はブロックID、もしくはFAWEのパターン(<code>#pattern</code>)をそのまま当てはめられる。たとえば、<code>//set &lt;pattern&gt;</code> とあるなら <code>//set 1</code> でもよいし <code>//set #l3d[1,2,3]</code> としてもよい。</li>
+</ul>
+<h2 id="カテゴリ外">カテゴリ外</h2>
+<h3 id="cancel">//cancel</h3>
+<pre><code class="language-command">//cancel
+</code></pre>
+<p>現在行っている処理を中止する。</p>
+<h3 id="plot-replaceall">/plot replaceall</h3>
+<pre><code class="language-commmand">/plot replaceall
+</code></pre>
+<p>（情報収集中）</p>
+<h2 id="worldedit">WorldEdit</h2>
+<h3 id="we-threads">/we threads</h3>
+<pre><code class="language-command">/we threads
+</code></pre>
+<p>現在の WorldEdit のスレッド情報を書き出す。</p>
+<h3 id="we-version">/we version</h3>
+<pre><code class="language-command">/we version
+</code></pre>
+<p>WorldEdit と FAWE のバージョン情報を表示する。</p>
+<h3 id="we-help">/we help</h3>
+<pre><code class="language-command">/we help [&lt;コマンド&gt;]
+</code></pre>
+<p>FAWE のコマンドヘルプを参照する。</p>
+<h3 id="we-reload">/we reload</h3>
+<pre><code class="language-command">/we reload
+</code></pre>
+<p>設定を再読込する。</p>
+<h3 id="we-changelog">/we changelog</h3>
+<pre><code class="language-command">/we changelog
+</code></pre>
+<p>FAWE のバージョン履歴を確認する。</p>
+<h3 id="we-cui">/we cui</h3>
+<pre><code class="language-command">/we cui
+</code></pre>
+<p>CUI ハンドシェイクを完了する（内部用途）。</p>
+<h3 id="we-debugpaste">/we debugpaste</h3>
+<pre><code class="language-command">/we debugpaste
+</code></pre>
+<p>hastebin.com にデバッグ情報を書き出してアップロードする。</p>
+<h3 id="we-tz">/we tz</h3>
+<pre><code class="language-command">/we tz [タイムゾーン]
+</code></pre>
+<p>スナップショット用にタイムゾーンを設定する。</p>
+<h2 id="ユーティリティ">ユーティリティ</h2>
+<h3 id="remove">/remove</h3>
+<pre><code class="language-command">/remove &lt;種類&gt; &lt;半径&gt;
+
+&lt;種類&gt;:
+projectiles(矢など) items(アイテム) paintings(絵画)
+boats(ボート) minecarts(トロッコ) tnt(TNT) xp(経験値)
+</code></pre>
+<p>半径内の指定した種類のエンティティをすべて削除する。</p>
+<h3 id="butcher">/butcher</h3>
+<pre><code class="language-command">/butcher [-p] [-n] [-g] [-a] [-b] [-t] [-f] [-r] [-l] [半径]
+
+-p : ペットを含める
+-n : NPCを含める
+-g : ゴーレムを含める
+-a : 動物を含める
+-b : アンビエントなMobを含める
+-f : 上記全てを含める
+-r : 防具立てを含める
+-l : 現在何の挙動も起こさない
+</code></pre>
+<p>近隣の Mob を殺す。半径を指定しなかったらデフォルトの設定が適用される。</p>
+<h3 id="fill">//fill</h3>
+<pre><code class="language-command">//fill &lt;pattern&gt; &lt;半径&gt; [深さ]
+</code></pre>
+<p>穴を pattern で満たす。</p>
+<h3 id="fillr">//fillr</h3>
+<pre><code class="language-command">//fillr &lt;pattern&gt; &lt;半径&gt; [深さ]
+</code></pre>
+<p>再帰的に穴を pattern で満たす。</p>
+<h3 id="drain">//drain</h3>
+<pre><code class="language-command">//drain &lt;半径&gt;
+</code></pre>
+<p>水溜まりや溶岩溜まりを吸い取る。</p>
+<h3 id="replacenear">//replacenear</h3>
+<pre><code class="language-command">//replacenear &lt;半径&gt; &lt;置換元ブロック|mask&gt; &lt;置換先ブロック|pattern&gt;
+</code></pre>
+<p>近隣のブロックを置き換える。</p>
+<h3 id="removeabove">//removeabove</h3>
+<pre><code class="language-command">//removeabove [半径] [高さ]
+高さ &gt;= 1
+</code></pre>
+<p>頭上のブロックを消す。</p>
+<h3 id="removebelow">//removebelow</h3>
+<pre><code class="language-command">//removebelow [半径] [高さ]
+高さ &gt;= 1
+</code></pre>
+<p>足元のブロックを消す。</p>
+<h3 id="removenear">//removenear</h3>
+<pre><code class="language-command">//removenear &lt;ブロック&gt; [半径]
+</code></pre>
+<p>近隣のブロックを消す。</p>
+<h3 id="fixwater">//fixwater</h3>
+<pre><code class="language-command">//fixwater &lt;半径&gt;
+</code></pre>
+<p>流れている水を静止させる。</p>
+<h3 id="fixlava">//fixlava</h3>
+<pre><code class="language-command">//fixlava &lt;半径&gt;
+</code></pre>
+<p>流れている溶岩を静止させる。</p>
+<h3 id="snow">//snow</h3>
+<pre><code class="language-command">//snow [半径=10]
+</code></pre>
+<p>半径内に雪を降らせる。</p>
+<h3 id="thaw">//thaw</h3>
+<pre><code class="language-command">//thaw [半径=10]
+</code></pre>
+<p>半径内の雪を融かす。</p>
+<h3 id="green">//green</h3>
+<pre><code class="language-command">//green [半径]
+</code></pre>
+<p>半径内を緑化する。</p>
+<h3 id="ex">//ex</h3>
+<pre><code class="language-command">//ex [半径]
+</code></pre>
+<p>半径内の炎を消火する。</p>
+<h3 id="calc">//calc</h3>
+<pre><code class="language-command">//calc &lt;評価式&gt;
+</code></pre>
+<p>与えられた数学の評価式を計算する。</p>
+<h3 id="help">//help</h3>
+<pre><code class="language-command">//help [&lt;コマンド&gt;]
+</code></pre>
+<p>与えられたコマンドのヘルプを参照する。</p>
+<h3 id="gui">//gui</h3>
+<pre><code class="language-command">//gui
+</code></pre>
+<p>GUIを表示する。FAWE 18.5.11-fe17434-1112 では実装されていない。</p>
+<h3 id="masks">/masks</h3>
+<pre><code class="language-command">/mask [ページ=1|検索|mask]
+</code></pre>
+<p>（与えられた）マスクのヘルプを参照する。</p>
+<h3 id="patterns">/patterns</h3>
+<pre><code class="language-command">/mask [ページ=1|検索|pattern]
+</code></pre>
+<p>（与えられた）パターンのヘルプを参照する。</p>
+<h3 id="tranforms">/tranforms</h3>
+<pre><code class="language-command">/mask [ページ=1|検索|tranform]
+</code></pre>
+<p>（与えられた）トランスフォームのヘルプを参照する。</p>
+<h3 id="confirm">/confirm</h3>
+<pre><code class="language-command">/confirm
+</code></pre>
+<p>処理の実行を承認する。範囲が広い処理の続行などに使われる。</p>
+<h2 id="領域操作">領域操作</h2>
+<h3 id="set">//set</h3>
+<pre><code class="language-command">//set &lt;pattern&gt;
+</code></pre>
+<p>領域内の中すべてにブロックを設置する。</p>
+<h3 id="replace">//replace</h3>
+<pre><code class="language-command">//replace [置換元ブロック|mask] &lt;置換先ブロック|pattern&gt;
+//rep と略せる。
+</code></pre>
+<p>領域内のブロックを別のブロックに置き換える。<br>置換元ブロックを略した場合は空気以外のブロックすべてが置換先ブロックになる。</p>
+<h3 id="walls">//walls</h3>
+<pre><code class="language-command">//walls &lt;pattern&gt;
+</code></pre>
+<p>領域の四方に壁を生成する。</p>
+<h3 id="lay">//lay</h3>
+<pre><code class="language-command">//lay &lt;pattern&gt;
+</code></pre>
+<p>領域内の一番上のブロックを別のブロックにする。</p>
+<h3 id="overlay">//overlay</h3>
+<pre><code class="language-command">//overlay &lt;pattern&gt;
+</code></pre>
+<p>領域内の一番上のブロックの上にブロックを乗せる。</p>
+<h3 id="stack">//stack</h3>
+<pre><code class="language-command">//stack [-s] [-a] [回数] [方角]
+
+-s : 選択範囲も同時に移動する
+-a : 空気ブロックを無視する
+</code></pre>
+<p>領域内のブロックを積み重ねる。<br>回数を略した場合は1回分重ねられる。<br>方角を略した場合は自分が向いている方向に積み重ねられる。</p>
+<h3 id="move">//move</h3>
+<pre><code class="language-command">//move [-s] [-b] [-e] [-a] [距離] [方角] [残すブロック]
+
+-s : 選択範囲も同時に移動する
+-b : バイオームを移動と同時にコピーする
+-e : エンティティを無視する
+-a : 空気ブロックを無視する
+</code></pre>
+<p>領域内のブロックを移動する。<br>残すブロックは移動した後の空白部分に埋められる。何も指定しなければ空気になる。</p>
+<h3 id="smooth">//smooth</h3>
+<pre><code class="language-command">//smooth [-n] [-s] [度合い]
+
+-n : 自然発生したブロックのみを滑らかにする
+-s : 雪のみを滑らかにする
+</code></pre>
+<p>領域内のブロックの傾きを滑らかにする。</p>
+<h3 id="regen">//regen</h3>
+<pre><code class="language-command">//regen [バイオーム] [シード]
+</code></pre>
+<p>領域内のブロックを再生成する。<br>シードを略した場合はワールドのシード値に依存する。</p>
+<h3 id="naturalize">//naturalize</h3>
+<pre><code class="language-command">//naturalize
+</code></pre>
+<p>領域内のブロックの上三段を土にし、それより下を石にする。</p>
+<h3 id="fall">//fall</h3>
+<pre><code class="language-command">//fall [-m] [置換え]
+
+-m : 領域内の一番下に落とす
+</code></pre>
+<p>領域内のブロックを地表に落とす。</p>
+<h3 id="forest">//forest</h3>
+<pre><code class="language-command">//forest [種類] [密度]
+</code></pre>
+<p>領域内に森を生成する。</p>
+<h3 id="setskylight">//setskylight</h3>
+<pre><code class="language-command">//setskylight &lt;値&gt;
+値: 1-15
+</code></pre>
+<p>領域内の光度を設定する。</p>
+<h3 id="fixlighting">//fixlighting</h3>
+<pre><code class="language-command">//fixlighting
+</code></pre>
+<p>領域内の光度を直す。</p>
+<h3 id="line">//line</h3>
+<pre><code class="language-command">//line &lt;pattern&gt; [厚さ]
+
+-h : 線の外枠のみを生成する。
+</code></pre>
+<p>第1座標から第2座標に向かってブロックの線を生成する。矩形選択でのみ実行できる。<br>FAWE 18.5.11-fe17434-1112 では厚さに 4 以上を指定すると例外(java.lang.UnsupportedOperationException)となる。</p>
+<h3 id="faces">//faces</h3>
+<pre><code class="language-command">//faces &lt;pattern&gt;
+他: //outline
+</code></pre>
+<p>領域内の壁、天井、床にブロックを生成する（＝箱状にブロックを生成する）。</p>
+<h3 id="hollow">//hollow</h3>
+<pre><code class="language-command">//hollow [&lt;厚さ&gt; [&lt;pattern&gt;]]
+</code></pre>
+<h3 id="center">//center</h3>
+<pre><code class="language-command">//center &lt;pattern&gt;
+</code></pre>
+<p>領域内の中心にブロックを生成する。</p>
+<h3 id="nbtinfo">//nbtinfo</h3>
+<pre><code class="language-command">//nbtinfo
+</code></pre>
+<p>照準を向けたブロックの NBT を表示する。</p>
+<h3 id="wea">//wea</h3>
+<pre><code class="language-command">//wea
+</code></pre>
+<p>領域の編集制限を無視する。</p>
+<h3 id="wer">//wer</h3>
+<pre><code class="language-command">//wer
+</code></pre>
+<p>現在許可されている領域を選択する。</p>
+<h3 id="deform">//deform</h3>
+<pre><code class="language-command">//deform &lt;評価式&gt; [-r] [-o]
+</code></pre>
+<p>領域内のブロックを指定された評価式によって変形する。<br>評価式は各ブロックに対して実行され、変更されることになるブロックを指定するように変数 X, Y, Z を変更する。</p>
+<h2 id="領域選択">領域選択</h2>
+<h3 id="expand">//expand</h3>
+<pre><code class="language-command">//expand &lt;量&gt; [反転量] [方角]
+</code></pre>
+<p>領域を広げる。<br>反転量も指定すると、指定した方角とは逆方向にも領域が広がる。</p>
+<h3 id="contract">//contract</h3>
+<pre><code class="language-command">//contract &lt;量&gt; [反転量] [方角]
+</code></pre>
+<p>領域を狭める。<br>反転量も指定すると、指定した方角とは逆方向にも領域が狭まる。</p>
+<h3 id="shift">//shift</h3>
+<pre><code class="language-command">//shift &lt;量&gt; [方角]
+</code></pre>
+<p>領域をずらす。</p>
+<h3 id="outset">//outset</h3>
+<pre><code class="language-command">//outset &lt;量&gt;
+
+-h : 水平方向のみ
+-v : 垂直方向のみ
+</code></pre>
+<p>領域をひと回り大きくする。</p>
+<h3 id="inset">//inset</h3>
+<pre><code class="language-command">//inset &lt;量&gt;
+
+-h : 水平方向のみ
+-v : 垂直方向のみ
+</code></pre>
+<p>領域をひと回り小さくする。</p>
+<h3 id="pos1">//pos1</h3>
+<pre><code class="language-command">//pos1 [座標]
+</code></pre>
+<p>領域の始点を設定する。</p>
+<h3 id="pos2">//pos2</h3>
+<pre><code class="language-command">//pos2 [座標]
+</code></pre>
+<p>領域の終点(第2座標以降)を設定する。</p>
+<h3 id="hpos1">//hpos1</h3>
+<pre><code class="language-command">//hpos1
+</code></pre>
+<p>領域の始点を照準の先に設定する。</p>
+<h3 id="hpos2">//hpos2</h3>
+<pre><code class="language-command">//hpos2
+</code></pre>
+<p>領域の終点(第2座標以降)を照準の先に設定する。</p>
+<h3 id="count">//count</h3>
+<pre><code class="language-command">//count &lt;ブロック&gt;
+</code></pre>
+<p>領域内のブロックを数える。</p>
+<h3 id="size">//size</h3>
+<pre><code class="language-command">//size
+
+-c : クリップボードを参照する
+</code></pre>
+<p>領域またはクリップボードの大きさを取得する。</p>
+<h3 id="distr">//distr</h3>
+<pre><code class="language-command">//distr
+
+-c : クリップボードを参照する
+-d : ブロックの勘定をデータ値ごとに分離する
+</code></pre>
+<p>領域内のブロックの成分を表示する。</p>
+<h3 id="wand">//wand</h3>
+<pre><code class="language-command">//wand
+</code></pre>
+<p>領域を選択するための道具を取得する。</p>
+<h3 id="chunk">//chunk</h3>
+<pre><code class="language-command">//chunk [X,Z]
+
+-s : 選択した領域を元にチャンクを選択する
+-c : チャンクの座標を特定する
+</code></pre>
+<p>現在立っているチャンクを選択する。-s フラグを指定すると、選択した領域が含むチャンクすべてを選択する。</p>
+<p>座標の直接指定を行うと、現在立っている座標ではなくその座標のチャンクが選択される。チャンク座標を指定するには -c フラグを指定する。そうでなければ完全な座標が暗黙的に指定される。</p>
+<h3 id="toggleeditwand">/toggleeditwand</h3>
+<pre><code class="language-command">/toggleditwand
+</code></pre>
+<p>領域選択を行う道具の機能性を切り替える。</p>
+<h2 id="履歴">履歴</h2>
+<h3 id="undo">//undo</h3>
+<pre><code class="language-command">//undo [回数] [プレイヤー]
+</code></pre>
+<p>最後の編集を巻き戻す。</p>
+<h3 id="redo">//redo</h3>
+<pre><code class="language-command">//redo [回数] [プレイヤー]
+</code></pre>
+<p>巻き戻された編集をもう一度実行する。</p>
+<h3 id="clearhistory">//clearhistory</h3>
+<pre><code class="language-command">//clearhistory
+</code></pre>
+<p>自分の編集履歴を消去する。</p>
+<h3 id="frb">//frb</h3>
+<pre><code class="language-command">//frb &lt;プレイヤー=Empire92&gt; &lt;半径=5&gt; &lt;時間=3d4h&gt;
+
+時間 : s(秒) m(分) h(時) d(日) y(年)
+</code></pre>
+<p>特定の編集を巻き戻す。</p>
+<h2 id="schematic">Schematic</h2>
+<p>/schematic は /schem と略せる。以後は略称を用いる。<br>/download を実行すると、現在のクリップボードの内容を Schematic ファイルに起こせる。</p>
+<h3 id="schem-save">/schem save</h3>
+<pre><code class="language-command">/schem save [フォーマット] &lt;ファイル名&gt;
+</code></pre>
+<p>Schematic ファイル内のブロックをクリップボードに保存する。</p>
+<h3 id="schem-delete">/schem delete</h3>
+<pre><code class="language-command">/schem delete &lt;ファイル名&gt;
+</code></pre>
+<p>Schematic ファイルの一覧から指定したファイルを削除する。</p>
+<h3 id="schem-show">/schem show</h3>
+<pre><code class="language-command">/schem show [globalmine|フィルター]
+</code></pre>
+<p>-r &lt;フォーマット&gt; : フォーマットを限定する</p>
+<p>Schematic ディレクトリに存在するすべての Schematic ファイルを表示する。</p>
+<h3 id="schem-list">/schem list</h3>
+<pre><code class="language-command">/schem [global|mine] [フィルター] [ページ=1]
+
+-p &lt;ページ&gt;  : 要求したページを表示する
+-f &lt;フォーマット&gt;  : フォーマットを限定する
+</code></pre>
+<p>Schematic ディレクトリに存在するすべての Schematic ファイルを表示する。</p>
+<h3 id="schem-clear">/schem clear</h3>
+<pre><code class="language-command">/schem clear
+</code></pre>
+<p>クリップボードを空にする。</p>
+<h3 id="schem-load">/schem load</h3>
+<pre><code class="language-command">/schem load [フォーマット] &lt;ファイル名&gt;
+</code></pre>
+<p>Schematic ファイル内のブロックをクリップボードに読み込む。</p>
+<h3 id="schem-loadall">/schem loadall</h3>
+<pre><code class="language-command">/schem loadall [フォーマット] &lt;ファイル名|URL&gt;
+
+-r : ランダムに回転させる
+</code></pre>
+<p>複数の Schematic ファイルを読み込む。</p>
+<h3 id="schem-unload">/schem unload</h3>
+<pre><code class="language-command">/schem unload [ファイル名]
+</code></pre>
+<p>複数のクリップボードから特定のものを削除する。</p>
+<h3 id="schem-remap">/schem remap</h3>
+<pre><code class="language-command">/schem remap
+</code></pre>
+<p>MCPE/PC 間のデータを再マッピングする。</p>
+<h3 id="schem-move">/schem move</h3>
+<pre><code class="language-command">/schem move &lt;ディレクトリ&gt;
+</code></pre>
+<p>現在読み込んでいる Schematic ファイルを移動する。</p>
+<h3 id="schem-formats">/schem formats</h3>
+<pre><code class="language-command">/schem formats
+</code></pre>
+<p>現在有効な Schematic ファイルのフォーマットの一覧を表示する。</p>
+<h2 id="クリップボード">クリップボード</h2>
+<h3 id="copy">//copy</h3>
+<pre><code class="language-command">//copy [-e] [-m &lt;mask&gt;] [-b]
+
+-e : エンティティを無視する
+-m : ソースマスクを設定する(そのため空気ブロックは無視される)
+-b : バイオームもコピーする
+</code></pre>
+<p>領域をコピーしクリップボードに保存する。<br>エンティティを貼り付けたとしても、それを //undo することはできない。</p>
+<h3 id="cut">//cut</h3>
+<pre><code class="language-command">//cut [-e] [-m &lt;mask&gt;] [-b]
+
+-e : エンティティを無視する
+-m : ソースマスクを設定する(そのため空気ブロックは無視される)
+-b : バイオームもコピーする
+</code></pre>
+<p>領域を切り取ってクリップボードに保存する。<br>エンティティを貼り付けたとしても、それを //undo することはできない。</p>
+<h3 id="paste">//paste</h3>
+<pre><code class="language-command">//paste [-a] [-b] [-e] [-o] [-s]
+
+-a : 空気ブロックを無視する
+-b : バイオームのコピーを行わない
+-e : エンティティのコピーを行わない
+-o : コピーを行った範囲に貼り付ける
+-s : 貼り付けた後、領域を新たに選択する
+</code></pre>
+<p>クリップボード内のブロックを貼り付ける。</p>
+<h3 id="lazycopy">//lazycopy</h3>
+<pre><code class="language-command">//lazycut [-e] [-m &lt;mask&gt;] [-b]
+
+-e : エンティティを無視する
+-m : ソースマスクを設定する(そのため空気ブロックは無視される)
+-b : バイオームもコピーする
+</code></pre>
+<h3 id="lazycut">//lazycut</h3>
+<pre><code class="language-command">//lazycut  [-e] [-m &lt;mask&gt;] [-b]
+
+-e : エンティティを無視する
+-m : ソースマスクを設定する(そのため空気ブロックは無視される)
+-b : バイオームもコピーする
+</code></pre>
+<p>領域をコピーしクリップボードに保存する。**//paste 実行後にはじめて領域が切り取られる**。<br>エンティティを貼り付けたとしても、それを //undo することはできない。</p>
+<h3 id="flip">//flip</h3>
+<pre><code class="language-command">//flip [方角]
+</code></pre>
+<p>クリップボード内のブロックを、指定された方角に向かって線対称に反転させる。</p>
+<h3 id="rotate">//rotate</h3>
+<pre><code class="language-command">//rotate &lt;y軸&gt; [x軸] [z軸]
+</code></pre>
+<p>クリップボード内のブロックを回転させる。</p>
+<h4 id="例">例</h4>
+<p>北方向を向いている。黄緑色がY軸。赤色がX軸。黄色がZ軸。<br>Y軸を指定すると円形に回転する。<br>X軸を指定すると奥の方にぐるんと回転する。<br>Z軸を指定すると横方向に回転する。</p>
+<p><img src="https://i.imgur.com/LBKX54b.png" alt="rotate"></p>
+<h3 id="download">/download</h3>
+<pre><code class="language-command">/download [フォーマット名]
+</code></pre>
+<p>Webインタフェースを通じてクリップボードから Schematic ファイルを生成しダウンロードする。</p>
+<h2 id="地形生成">地形生成</h2>
+<h3 id="sphere">//sphere</h3>
+<pre><code class="language-command">//sphere &lt;pattern&gt; &lt;半径:X&gt;[,&lt;半径:Y&gt;,&lt;半径:Z&gt;] [頭上生成?]
+</code></pre>
+<p>球体を生成する。楕円球を作ることもできる。</p>
+<h3 id="hsphere">//hsphere</h3>
+<pre><code class="language-command">//hsphere &lt;pattern&gt; &lt;半径:X&gt;[,&lt;半径:Y&gt;,&lt;半径:Z&gt;] [頭上生成?]
+</code></pre>
+<p>中が空洞の球体を生成する。楕円球を作ることもできる。</p>
+<h3 id="cyl">//cyl</h3>
+<pre><code class="language-command">//cyl &lt;半径:X&gt;[,&lt;半径:Z&gt;] [高さ]
+</code></pre>
+<p>円柱を生成する。楕円にすることもできる。</p>
+<h3 id="hcyl">//hcyl</h3>
+<pre><code class="language-command">//hcyl &lt;半径:X&gt;[,&lt;半径:Z&gt;] [高さ]
+</code></pre>
+<p>中が空洞の円柱を生成する。楕円にすることもできる。</p>
+<h3 id="pyramid">//pyramid</h3>
+<pre><code class="language-command">//pyramid &lt;pattern&gt; &lt;大きさ&gt;
+</code></pre>
+<p>ピラミッドを生成する。</p>
+<h3 id="hpyramid">//hpyramid</h3>
+<pre><code class="language-command">//hpyramid &lt;pattern&gt; &lt;大きさ&gt;
+</code></pre>
+<p>中が空洞のピラミッドを生成する。</p>
+<h3 id="ore">//ore</h3>
+<pre><code class="language-command">//ore &lt;mask&gt; &lt;pattern&gt; &lt;大きさ&gt; &lt;頻度&gt; &lt;希少度&gt; &lt;最小Y&gt; &lt;最大Y&gt;
+</code></pre>
+<p>鉱脈を生成する。</p>
+<h3 id="ores">//ores</h3>
+<pre><code class="language-command">//ores &lt;mask&gt;
+</code></pre>
+<p>鉱石を生成する。</p>
+<h3 id="caves">//caves</h3>
+<pre><code class="language-command">//caves [大きさ=8] [頻度=40] [希少度=7] [最小Y=8] [最大Y=127] [sys頻度=1] [sys希少度=25] [pocket希少度=0] [pocket最小=0] [pocketMax=3]
+</code></pre>
+<p>洞窟網を生成する。</p>
+<h3 id="forestgen">/forestgen</h3>
+<pre><code class="language-command">/forestgen [大きさ] [種類] [密度]
+</code></pre>
+<p>森を生成する。</p>
+<h3 id="pumpkins">/pumpkins</h3>
+<pre><code class="language-command">/pumpkins [大きさ]
+</code></pre>
+<p>かぼちゃを生成する。</p>
+<h2 id="バイオーム">バイオーム</h2>
+<h3 id="setbiome">//setbiome</h3>
+<pre><code class="language-command">//setbiome &lt;バイオーム&gt; [-p]
+
+-p : 現在立っているブロックのバイオームを使う
+</code></pre>
+<p>選択された領域のバイオームを設定する。<br>標準では選択されたすべてのブロックに適用される。</p>
+<h3 id="biomeinfo">/biomeinfo</h3>
+<pre><code class="language-command">/biomeinfo [ページ]
+有効なバイオーム一覧を表示する。
+</code></pre>
+<h3 id="biomelist">/biomelist</h3>
+<pre><code class="language-command">/biomelist [-p] [-t]
+-p : 現在立っているブロックの情報を表示する
+-t : 照準先のブロックの情報を表示する
+</code></pre>
+<p>選択された領域のバイオームを表示する。<br>何も指定しなければ、選択されたブロックすべての情報が表示される。</p>
+<h2 id="anvil">Anvil</h2>
+<h2 id="スーパーピッケル">スーパーピッケル</h2>
+<p><code>//</code> で無効にできる。</p>
+<h3 id="sp-recur">/sp recur</h3>
+<pre><code class="language-command">/sp recur &lt;半径&gt;
+</code></pre>
+<p>再帰的な(隣接したブロックのみ適用される)スーパーピッケルを有効にする。</p>
+<h3 id="sp-area">/sp area</h3>
+<pre><code class="language-command">/sp area &lt;半径&gt;
+</code></pre>
+<p>半径内のブロックすべてに適用されるスーパーピッケルを有効にする。</p>
+<h3 id="sp-single">/sp single</h3>
+<pre><code class="language-command">/sp single
+</code></pre>
+<p>単独のブロックのみ適用されるスーパーピッケルを有効にする（＝1つずつ壊す）。</p>
+<h2 id="移動">移動</h2>
+<h3 id="unstuck">/unstuck</h3>
+<pre><code class="language-command">/unstuck
+</code></pre>
+<p>ブロックの内側に埋まった状態から抜け出す。</p>
+<h3 id="thru">/thru</h3>
+<pre><code class="language-command">/thru
+</code></pre>
+<p>壁の向こう側に移動する。</p>
+<h3 id="jumpto">/jumpto</h3>
+<pre><code class="language-command">/jumpto [world,x,y,z]
+</code></pre>
+<p>指定された座標へ移動する。</p>
+<h3 id="up">/up</h3>
+<pre><code class="language-command">/up &lt;上昇ブロック数&gt; [-f] [-g]
+
+(公式リファレンス・ゲーム内ヘルプともにフラグの説明無し)
+</code></pre>
+<p>指定した上昇ブロック数分上昇する。</p>
+<h3 id="ascend">/ascend</h3>
+<pre><code class="language-command">/ascend [#|段数]
+</code></pre>
+<p>上のフロアに上がる。</p>
+<h3 id="descend">/descend</h3>
+<pre><code class="language-command">/descend [#|フロア]
+</code></pre>
+<p>下のフロアに下がる。</p>
+<h3 id="ceil">/ceil</h3>
+<pre><code class="language-command">/ceil [頭上の余裕] [-f] [-g]
+
+(公式リファレンス・ゲーム内ヘルプともにフラグの説明無し)
+</code></pre>
+<p>頭上の天井の真下に移動する。</p>
+<h2 id="snapshot">Snapshot</h2>
+<h2 id="snapshot-utilities">Snapshot utilities</h2>
+<h2 id="scripting">Scripting</h2>
+<h2 id="chunk-1">Chunk</h2>
+<h2 id="options">Options</h2>
+<h2 id="brush-options">Brush Options</h2>
+<h2 id="ツール">ツール</h2>
+<h3 id="br-info">/br info</h3>
+<pre><code class="language-command">/br info
+</code></pre>
+<p>ブロックの情報を表示するブラシに設定する。</p>
+<h3 id="br-inspect">/br inspect</h3>
+<pre><code class="language-command">/br inspect [半径]
+</code></pre>
+<p>ブロックのFAWEによる編集ログを表示するブラシに設定する。</p>
+<h3 id="br-farwand">/br farwand</h3>
+<pre><code class="language-command">/br farwand
+</code></pre>
+<p>遠くの座標を領域指定するブラシに設定する。</p>
+<h3 id="br-cycler">/br cycler</h3>
+<pre><code class="language-command">/br cycler
+</code></pre>
+<p>ブロックのメタ値を変える(例： 1 → 15)。<br>左クリックで順送り。右クリックで逆送り。</p>
+<h4 id="向きが変わるもの">向きが変わるもの</h4>
+<p>ピストン、かまど、ディスペンサー、ドロッパー<br>原木、チェスト(大小、トラップチェスト、エンダーチェストを含む)、看板<br>かぼちゃ(ジャック・オ・ランタンを含む)</p>
+<h4 id="色が変わるもの">色が変わるもの</h4>
+<p>羊毛、カーペット、色付きガラス、色つき板ガラス</p>
+<h5 id="種類が変わるもの">種類が変わるもの</h5>
+<p>葉っぱ、苗木、花、二段重ねの半ブロック(ID: 43)、草(シダ)、土</p>
+<h5 id="柄が変わるもの">柄が変わるもの</h5>
+<p>砂岩、石レンガ、クォーツブロック</p>
+<h5 id="その他">その他</h5>
+<p>大釜(水が貯まる)、雪(高さが変わる)、ケーキ(食べかけ度が変わる)</p>
+<p>参考画像： 対応ブロック（FAWE のバージョン更新によって対応するブロックが増えるかもしれない）<br><img src="https://i.imgur.com/gMW5OJX.png" alt="Supporting blocks for /br cycler"></p>
+<h3 id="br-deltree">/br deltree</h3>
+<pre><code class="language-command">/br deltree
+</code></pre>
+<p>浮かんでいる木を伐採する。</p>
+<h2 id="ブラシ">ブラシ</h2>
+<p><code>//brush</code> , <code>/brush</code> , <code>//br</code> , <code>/br</code> で実行できる。下記では <code>/br</code> と略する。</p>
+<p>基本的に設置ができないアイテム(=ブロック以外)を手に持った状態で、コマンドを実行する。<br>同じアイテムに対して結び付けられるブラシは一種類のみである。</p>
+<h3 id="none">/none</h3>
+<pre><code class="language-command">/br none
+他: /none
+</code></pre>
+<p>手に持っているブラシを消す。</p>
+<h3 id="br-catenary">/br catenary</h3>
+<pre><code class="language-command">/br catenary &lt;pattern&gt; [湾曲度=1.2] [大きさ=0]
+他: /br cat /br gravityline /br saggedline
+</code></pre>
+<p>2つの点をつなぐぶら下がり線を描く。湾曲度は小数指定ができる。<br>湾曲度を大きくすると、よりV字状になってゆく。</p>
+<h4 id="例-1">例</h4>
+<p>/br catenary 101 1.03<br>青色の支柱と黄色の支柱を点として指定している。<br><img src="https://i.imgur.com/uWv1d85.png" alt="br catenary 101 1.03"></p>
+<h3 id="br-circle">/br circle</h3>
+<pre><code class="language-command">/br circle &lt;pattern&gt; [半径=5]
+</code></pre>
+<p>照準先に円を生成する。</p>
+<h3 id="br-cliff">/br cliff</h3>
+<pre><code class="language-command">/br cliff [半径=5] [ファイル|#clipboard|imgur=NULL] [回転=0] [Y拡大=1.00] [-r] [-l] [-s]
+他: /br flatcylinder
+
+-r : ランダムな回転をする
+-l : 雪の層のみに適用する
+-s : 滑らかにしない
+</code></pre>
+<p>地形をならして崖を生成する。</p>
+<h3 id="br-copypaste">/br copypaste</h3>
+<pre><code class="language-command">/br copypaste [-a] [-r] [半径=5]
+他: /br cp /br copy /br paste /br copypasta
+
+-a : 自分の向いている方向に合わせて滑らかな坂を作る
+-r : ランダムな回転をする
+</code></pre>
+<p>左クリックで半径内のブロックをコピーして、右クリックで貼り付ける。<br>または、クリップボードにコピー(<code>//copy</code>)したブロックを貼り付ける。</p>
+<h4 id="例-2">例</h4>
+<p>/br cp -a<br>自分の向きに合わせてブロックが貼り付けられている。<img src="https://i.imgur.com/rikH7Mt.png" alt="br cp -a"></p>
+<h3 id="br-extinguish">/br extinguish</h3>
+<pre><code class="language-command">/br extinguish [半径=5]
+他: /br ex
+</code></pre>
+<p>半径内を消火する。</p>
+<h3 id="br-flatten">/br flatten</h3>
+<pre><code class="language-command">/br flatten [半径=5] [file|#clipboard|imgur=NULL] [回転=0] [Y拡大=1.00] [-r] [-l] [-s]
+他: /br flat /br flatmap
+
+-r : ランダムな回転をする
+-l : 雪の層のみに適用する
+-s : 滑らかにしない
+</code></pre>
+<p>地形を平らにする。基準のブロック(照準先)の高さに合わせてなだらかになる。<br>よって高い部分のブロックを基準にすると、ブロックを全体的に持ち上げる挙動を起こす。</p>
+<h3 id="br-pull">/br pull</h3>
+<pre><code class="language-command">/br pull [半径=5]
+</code></pre>
+<p>地形を自分の方へ寄せる。</p>
+<h3 id="br-shatter">/br shatter</h3>
+<pre><code class="language-command">/br shatter &lt;pattern&gt; [半径=10] [カウント]
+他: /br split /br partition
+</code></pre>
+<p>地形を複数に分割する不均等な線を生成する。</p>
+<h4 id="例-3">例</h4>
+<p>/br shatter 251:7,251:8,251:11 30 30<br><img src="https://i.imgur.com/PAIdKV1.png" alt="shatter"></p>
+<h3 id="br-smooth">/br smooth</h3>
+<pre><code class="language-command">/br smooth [大きさ=2] [繰り返し=4] [-n]
+-n : 自然に生成されたブロックと思われるものにのみ適用する
+</code></pre>
+<p>地形をなだらかにする。</p>
+<h3 id="br-sphere">/br sphere</h3>
+<pre><code class="language-command">/br sphere [-h] &lt;pattern&gt; [半径=2]
+他: /br s
+
+-h : 中を空洞にする
+</code></pre>
+<p>球体を生成する。</p>
+<h4 id="例-4">例</h4>
+<p>/br sphere 251:7,251:8,251:11 10<br><img src="https://i.imgur.com/2obXWYY.png" alt="sphere"></p>
+<h3 id="br-splatter">/br splatter</h3>
+<pre><code class="language-command">/br splatter &lt;pattern&gt; [半径=5] [生成数=1] [大きさ=5] [同材質=true]
+他: /br splat
+</code></pre>
+<p>同材質が True の場合は1つの塊は同じブロックになる。<br>False の場合は1つの塊でも複数ブロックが混ざるようになる。</p>
+<p>筆で水を跳ね飛ばすようにブロックを生成する。</p>
+<h4 id="例-5">例</h4>
+<p>/br splatter 251:7,251:8,251:11 30 30<br><img src="https://i.imgur.com/0Tj9jP5.png" alt="splatter"></p>
+<h3 id="br-surface">/br surface</h3>
+<pre><code class="language-command">/br surface &lt;pattern&gt; [半径=5]
+他: /br surf
+</code></pre>
+<p>地表にブロックを生成する。空気ブロックは置換えられない。</p>
+<h4 id="例-6">例</h4>
+<p>/br surface 251,251:7,251:8,251:11 30 30<br><img src="https://i.imgur.com/j9UP3gm.png" alt="br surface"></p>
+<h2 id="マスク">マスク</h2>
+<p><strong>マスク</strong>はブロックを配置することができるか判断する。<br>これにより、ブロックの編集範囲を限定することができる。</p>
+<p>平たく言うと <strong>//set で敷き詰めるブロックや、 /br sphere で生成するブロックの置く場所を制限する</strong>。</p>
+<p>, か &amp; でマスクを複数指定できる(即ち /mask 2,3 など)。<br>, はいずれかのマスクが該当すればブロックが編集されるが、&amp;はすべてのマスクが該当されなければ編集されない。</p>
+<ul>
+<li><code>/mask grass,cobblestone</code><br>編集範囲を草ブロックか丸石のみに限定する。</li>
+<li><code>/mask ![stone]&amp;![$river]</code><br>編集範囲を「石かつバイオームが川」<strong>ではない</strong>部分のみに限定する。</li>
+</ul>
+<p>場合によっては、マスクを適量 <code>[]</code> で囲う必要がある。</p>
+<h3 id="コマンド">コマンド</h3>
+<pre><code class="language-command">/mask &lt;mask&gt; /gmask &lt;mask&gt;
+</code></pre>
+<p>宛先ブロックに対して適用されるマスク。<br>前者はブラシ、後者は通常コマンド(//set)に適用される。</p>
+<pre><code class="language-command">/smask &lt;mask&gt; /gsmask &lt;mask&gt;
+</code></pre>
+<p>クリップボード内のブロックや選択した範囲に対して適用されるマスク。</p>
+<h3 id="existing">#existing</h3>
+<p>空気ブロック以外に限定する。</p>
+<h4 id="例-7">例</h4>
+<pre><code class="language-command">/br s #surfacespread[10][#existing] [半径]
+</code></pre>
+<p>半径内の既存のブロックすべてを周囲に散らばす。</p>
+<h3 id="surface">#surface</h3>
+<p>地表のみに限定する(空気に触れている固体ブロックのみ)。</p>
+<h4 id="例-8">例</h4>
+<pre><code class="language-command">/mask &gt;#surface
+</code></pre>
+<p>編集範囲を地表の上のみに限定する。</p>
+<h3 id="id">#id</h3>
+<p>IDのみに限定する。</p>
+<h3 id="data">#data</h3>
+<p>データ値のみに限定する。</p>
+<h3 id="haslight">#haslight</h3>
+<p>発光しているブロックか光が当たっているブロックのみに限定する。</p>
+<h3 id="nolight">#nolight</h3>
+<p>(<code>#haslight</code> の逆)<br>発光しているブロックか光があたっていないブロック<strong>以外</strong>に限定する。</p>
+<h3 id="dregion">#dregion</h3>
+<p>自分が範囲指定している領域内のみに限定する。</p>
+<h3 id="id-1">&gt;id</h3>
+<p>編集範囲を特定のブロックの上に限定する。</p>
+<h4 id="例-9">例</h4>
+<pre><code class="language-command">/mask &gt;grass
+</code></pre>
+<p><strong>grass</strong> (草ブロック)の上だけを書き換えるようになる。</p>
+<h3 id="id-2">&lt;id</h3>
+<p>編集範囲を特定のブロックの下に限定する。</p>
+<h4 id="例-10">例</h4>
+<pre><code class="language-command">/mask &lt;water&gt;
+</code></pre>
+<p><strong>water</strong> (水ブロック)の下だけを書き換えるようになる。</p>
+<h3 id="biome">$biome</h3>
+<p>編集範囲を特定のバイオームに限定する。biome のリストは //biomelist で見られる。<br>また、バイオームを書き換える際に用いることもできる。</p>
+<h4 id="例-11">例</h4>
+<pre><code class="language-command">/br s $roofed_forest [半径]
+</code></pre>
+<p>「覆われた森」バイオームを「描く」要領で設定できる。</p>
+<h3 id="mask">!mask</h3>
+<p>マスクの編集範囲を反転する。</p>
+<h4 id="例-12">例</h4>
+<pre><code class="language-command">/mask !grass
+</code></pre>
+<p>編集範囲を草ブロック<strong>以外</strong>に限定する。</p>
+<h2 id="パターン">パターン</h2>
+<p><strong>パターン</strong>はどのようにブロックが配置されるかを決定する。</p>
+<h3 id="記法">記法</h3>
+<pre><code class="language-command">#pattern[引数1][引数2][引数3]
+</code></pre>
+<h3 id="linear2d">#linear2d</h3>
+<pre><code class="language-command">#l2d[pattern]
+#linear2d は **#l2d** と略せる。
+</code></pre>
+<h3 id="linear3d">#linear3d</h3>
+<pre><code class="language-command">#l3d[pattern]
+#linear3d は **#l3d** と略せる。
+</code></pre>
+<h3 id="simplex">#simplex</h3>
+<pre><code class="language-command">#simplex[大きさ][pattern]
+</code></pre>
+<h3 id="spread">#spread</h3>
+<pre><code class="language-command">#spread[dx][dy][dz][pattern]
+</code></pre>
+<h3 id="surfacespread">#surfacespread</h3>
+<pre><code class="language-command">#surfacespread[拡散範囲][pattern]
+</code></pre>
+<h3 id="id-3">#id</h3>
+<pre><code class="language-command">#id[pattern]
+</code></pre>
+<p><strong>ID</strong>のみ書き換える。</p>
+<h4 id="例-13">例</h4>
+<p>(階段ブロックを範囲指定し) //rep #id[67] と実行すると、階段の向きはそのままで丸石の階段に置換えられる。</p>
+<h2 id="transforms">Transforms</h2>
+<h2 id="cfi">CFI</h2>
